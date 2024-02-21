@@ -23,12 +23,19 @@
 
 class Solution:
     def isPowerOfTwo(self, n: int) -> bool:
-        i = 0
-        while 2**i != n:
-            i = i + 1
-            if 2**i > n:
+        i = 2
+        c = 0
+        p = n
+        while i <= n:
+            if n % i == 0:
+                c += 1
+                n = n // i
+                i = 1
+            else:
                 return False
-        return True
+            i += 1
+        # print(c)
+        return 2**c == p
 
 
 if __name__ == "__main__":
