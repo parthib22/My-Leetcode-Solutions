@@ -1,4 +1,4 @@
-# https://leetcode.com/problems/two-sum/description/
+# https://leetcode.com/problems/two-sum/
 
 # 1. Two Sum
 
@@ -24,15 +24,18 @@
 
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> list[int]:
-        for i in range(len(nums) - 1):
-            for j in range(i + 1, len(nums)):
-                if nums[i] + nums[j] == target:
-                    return [i, j]
+        # for i in range(len(nums) - 1):
+        #     for j in range(i + 1, len(nums)):
+        #         if nums[i] + nums[j] == target:
+        #             return [i, j]
+        # return []
+        for i in range(len(nums)):
+            if target - nums[i] in nums[i + 1 :]:
+                return [i, i + 1 + nums[i + 1 :].index(target - nums[i])]
         return []
 
 
 if __name__ == "__main__":
     nums = list(map(int, input().split()))
-    print(nums)
     target = int(input())
     print(Solution().twoSum(nums, target))
