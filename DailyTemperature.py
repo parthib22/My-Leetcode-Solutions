@@ -1,4 +1,6 @@
-temp = [73, 74, 75, 71, 69, 72, 76, 73]
+# temp = [73, 74, 75, 71, 69, 72, 76, 73]
+# answer = []
+temp = list(map(int, input().split()))
 answer = []
 i = 0
 while i < len(temp):
@@ -8,10 +10,10 @@ while i < len(temp):
             answer.append(j - i)
             break
         j += 1
-    if j == len(temp) - 1:
+    if j == len(temp):
         answer.append(0)
     i += 1
-
+# answer.append(0)
 print(answer)
 
 # i = 0
