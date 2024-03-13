@@ -26,9 +26,10 @@
 class Solution:
     def maxFrequencyElements(self, nums: list[int]) -> int:
         d = {}
-        for i in range(len(nums)):
-            _count = nums.count(nums[i])
-            d[nums[i]] = _count
+        for num in nums:
+            if num not in d:
+                d[num] = 0
+            d[num] += 1
         val = list(d.values())
         _max = max(val)
         return _max * val.count(_max)
