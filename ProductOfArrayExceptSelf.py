@@ -21,23 +21,42 @@
 
 class Solution:
     def productExceptSelf(self, nums: list[int]) -> list[int]:
-        L = list()
-        prod = 1
-        _count = nums.count(0)
-        _len = len(nums)
-        if _count > 1:
-            L = [0 for i in range(_len)]
-        else:
+        # L = list()
+        # prod = 1
+        # _count = nums.count(0)
+        # _len = len(nums)
+        # if _count > 1:
+        #     L = [0 for i in range(_len)]
+        # else:
+        #     for num in nums:
+        #         if num != 0:
+        #             prod = prod * num
+        #     if _count == 0:
+        #         for num in nums:
+        #             L.append(prod // num)
+        #     elif _count == 1:
+        #         L = [0 for i in range(_len)]
+        #         L[nums.index(0)] = prod
+        # return L
+
+        if 0 not in nums:
+            mul = 1
             for num in nums:
-                if num != 0:
-                    prod = prod * num
-            if _count == 0:
+                mul *= num
+            return [mul // num for num in nums]
+        else:
+            zero = 0
+            for num in nums:
+                zero += 1 if num == 0 else 0
+                if zero > 1:
+                    break
+            if zero > 1:
+                return [0] * len(nums)
+            mul = 1
+            if zero == 1:
                 for num in nums:
-                    L.append(prod // num)
-            elif _count == 1:
-                L = [0 for i in range(_len)]
-                L[nums.index(0)] = prod
-        return L
+                    mul *= num if num != 0 else 1
+                return [mul if num == 0 else 0 for num in nums]
 
 
 if __name__ == "__main__":
