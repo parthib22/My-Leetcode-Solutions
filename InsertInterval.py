@@ -1,0 +1,68 @@
+# https://leetcode.com/problems/insert-interval/
+
+# Daily 17.03.2024
+
+# 57. Insert Interval
+
+# You are given an array of non-overlapping intervals intervals where intervals[i] = [starti, endi] represent the start and the end of the ith interval and intervals is sorted in ascending order by starti. You are also given an interval newInterval = [start, end] that represents the start and end of another interval.
+
+# Insert newInterval into intervals such that intervals is still sorted in ascending order by starti and intervals still does not have any overlapping intervals (merge overlapping intervals if necessary).
+
+# Return intervals after the insertion.
+
+# Note that you don't need to modify intervals in-place. You can make a new array and return it.
+
+# Example 1:
+# Input: intervals = [[1,3],[6,9]], newInterval = [2,5]
+# Output: [[1,5],[6,9]]
+
+# Example 2:
+# Input: intervals = [[1,2],[3,5],[6,7],[8,10],[12,16]], newInterval = [4,8]
+# Output: [[1,2],[3,10],[12,16]]
+# Explanation: Because the new interval [4,8] overlaps with [3,5],[6,7],[8,10].
+
+# Constraints:
+
+# 0 <= intervals.length <= 104
+# intervals[i].length == 2
+# 0 <= start.i <= endi <= 105
+# intervals is sorted by start.i in ascending order.
+# newInterval.length == 2
+# 0 <= start <= end <= 105
+
+
+class Solution:
+    def insert(
+        self, intervals: list[list[int]], newInterval: list[int]
+    ) -> list[list[int]]:
+
+        _list = list()
+        i = 0
+
+        while i < len(intervals) and intervals[i][1] < newInterval[0]:
+            _list.append(intervals[i])
+            i += 1
+
+        while i < len(intervals) and intervals[i][0] <= newInterval[1]:
+            newInterval = [
+                min(intervals[i][0], newInterval[0]),
+                max(intervals[i][1], newInterval[1]),
+            ]
+            i += 1
+        _list.append(newInterval)
+        _list.extend(intervals[i:])
+
+        return _list
+
+
+if __name__ == "__main__":
+    intervals = []
+    num_intervals = int(input())
+    for i in range(num_intervals):
+        start, end = map(int, input().split())
+        intervals.append([start, end])
+
+    new_start, new_end = map(int, input().split())
+    newInterval = [new_start, new_end]
+
+    print(Solution().insert(intervals, newInterval))
